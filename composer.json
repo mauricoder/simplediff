@@ -7,14 +7,13 @@
         "text compare"
     ],
     "license": "BSD-3-Clause",
-
     "authors": [
         {
             "name": "Paul Butler",
             "homepage": "https://github.com/paulgb"
         }
     ],
-
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "MauriCoder\\SimpleDiff\\": "lib"

@@ -22,6 +22,9 @@ namespace MauriCoder\SimpleDiff;
 
 class SimpleDiff
 {
+    protected $old;
+    protected $new;
+
     public function diff($old, $new, $maxlen = 0)
     {
         foreach($old as $oindex => $ovalue){
@@ -48,12 +51,28 @@ class SimpleDiff
         $ret = '';
         $diff = $this->diff(explode(' ', $old), explode(' ', $new));
         foreach($diff as $k){
-            if(is_array($k))
+            if(is_array($k)) {
+                $this->old .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'');
+                $this->new .= (!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":'');
                 $ret .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'').
                     (!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":'');
-            else $ret .= $k . ' ';
+            } else {
+                $ret .= $k . ' ';
+                $this->old .= $k . ' ';
+                $this->new .= $k . ' ';
+            }
         }
         return $ret;
+    }
+
+    public function getOld()
+    {
+        return $this->old;
+    }
+
+    public function getNew()
+    {
+        return $this->new;
     }
 
 }
