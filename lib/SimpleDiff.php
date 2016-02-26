@@ -22,8 +22,8 @@ namespace MauriCoder\SimpleDiff;
 
 class SimpleDiff
 {
-    protected $old;
-    protected $new;
+    protected $before;
+    protected $after;
 
     public function diff($old, $new, $maxlen = 0)
     {
@@ -52,27 +52,27 @@ class SimpleDiff
         $diff = $this->diff(explode(' ', $old), explode(' ', $new));
         foreach($diff as $k){
             if(is_array($k)) {
-                $this->old .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'');
-                $this->new .= (!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":'');
+                $this->before .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'');
+                $this->after .= (!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":'');
                 $ret .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":'').
                     (!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":'');
             } else {
                 $ret .= $k . ' ';
-                $this->old .= $k . ' ';
-                $this->new .= $k . ' ';
+                $this->before .= $k . ' ';
+                $this->after .= $k . ' ';
             }
         }
         return $ret;
     }
 
-    public function getOld()
+    public function getBefore()
     {
-        return $this->old;
+        return $this->before;
     }
 
-    public function getNew()
+    public function getAfter()
     {
-        return $this->new;
+        return $this->after;
     }
 
 }

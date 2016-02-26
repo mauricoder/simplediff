@@ -53,7 +53,7 @@ class SimpleDiffTest extends \PHPUnit_Framework_TestCase
     public function testDeletesOnly()
     {
         $this->simpleDiff->htmlDiff($this->a, $this->b);
-        $res = $this->simpleDiff->getOld();
+        $res = $this->simpleDiff->getBefore();
         $this->assertEquals("[b]Some bbcode[/b]
         Shouldn't hurt <del>anybady
 </del>        <del>[i]Waht</del> do <del>ya think?[/i]</del> ", $res);
@@ -62,7 +62,7 @@ class SimpleDiffTest extends \PHPUnit_Framework_TestCase
     public function testInsertsOnly()
     {
         $this->simpleDiff->htmlDiff($this->a, $this->b);
-        $res = $this->simpleDiff->getNew();
+        $res = $this->simpleDiff->getAfter();
         $this->assertEquals("[b]Some bbcode[/b]
         Shouldn't hurt <ins>anybody.
 </ins>        <ins>[i]What</ins> do <ins>you think?[/i]
